@@ -1,0 +1,22 @@
+NAME
+
+   Exclamation!
+
+ABOUT
+
+   Exclamation generates a fractal zoom of an exclamation mark and sends it
+   stdout.  Nifty!
+
+COMPILATION
+
+   ./compile.sh
+
+USAGE
+
+   exclamation NUMBER_OF_FRAMES
+
+COPYRIGHT NOTICE
+
+   Copyright John Morrice 2010.
+
+   Distributed under the terms of the GNU GPLv3.  See COPYING for details.

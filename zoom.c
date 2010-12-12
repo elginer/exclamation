@@ -1,3 +1,24 @@
+/*
+* Exclamation.  Copyright John Morrice 2010.
+*
+*
+* This file is part of Exclamation.
+*
+* Exclamation is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* Exclamation is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with Exclamation.  If not, see <http://www.gnu.org/licenses/>.
+*
+*/
+
 #include "exclamation.c"
 
 int
@@ -12,7 +33,7 @@ main(int argc, char ** argv)
 
    if (argc < 2)
    {
-      fprintf(stderr, "USAGE: exclamation POSITIVE_NUMBER\n");
+      fprintf(stderr, "USAGE: exclamation NUMBER_OF_FRAMES\n");
       exit(EXIT_FAILURE);
    }
 
