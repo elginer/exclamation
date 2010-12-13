@@ -41,7 +41,7 @@ main(int argc, char ** argv)
 
    parent.height = 20;
    parent.width = 2;
-   parent.bottom = -13;
+   parent.bottom = -10.59602;
    parent.left = -1;
 
    handle = start_drawing();
