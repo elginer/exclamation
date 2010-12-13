@@ -1,0 +1,6 @@
+OPTIMIZE!
+
+
+In fractal (exclamation.c)
+
+Store the parents in a linked list.  When constructing the new list of parents, from the children, remove all children which are not at all visible on screen.
