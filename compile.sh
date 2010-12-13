@@ -1,2 +1,2 @@
 #! /bin/bash
-gcc -g -Wall -o exclamation -lplot -I. zoom.c
+gcc -O2 -Wall -o exclamation -lplot -I. zoom.c

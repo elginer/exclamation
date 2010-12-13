@@ -79,47 +79,53 @@ step_width(struct Exclamation *children,
 }
 
 // Recurse one step
-// The children array must contain STEPCHILDREN allocated struct Exclamation *
+// The children array must contain STEPCHILDREN struct Exclamation
 void
-fractal_step(struct Exclamation *parent, struct Exclamation *children)
+fractal_step(float width, float height, 
+      float left, float bottom,
+      float xGap, float ySlot,
+      struct Exclamation *children)
 {
-   // Variables that do not change
-   // TODO: make const
-   float childHeight, childWidth,
-         xGap,
-         ySlot;
-
    // Variables for iteration
    float current_bottom;
    int i;
 
-   struct Exclamation fract = *parent;
-
-   // fprintf(stderr, "fractal_step\n");
-   ySlot = fract.height / VSLOTS;
-
-   // There are 2 gaps of 35% of the overall width
-   xGap = fract.width * 0.35;
-   childWidth = fract.width * 0.1;
-
-   // There is a gap of 0.1 of the height of the children between each child
-   childHeight = ySlot * 0.9;
-   
    // Write the bottom part of the exclamation mark.
-   step_width(children, fract.bottom, fract.left, childWidth, childHeight, xGap);
+   step_width(children, bottom, left, width, height, xGap);
 
    // fprintf(stderr, "drawn bottom children\n");
 
    // Write the top part of the exclamation mark.
-   current_bottom = fract.bottom + (ySlot * 2);
+   current_bottom = bottom + (ySlot * 2); 
 
    for (i = 3; i < STEPCHILDREN; i += HSLOTS)
    {
-      step_width(children + i, current_bottom, fract.left, childWidth, childHeight, xGap);
+      step_width(children + i, current_bottom, left, width, height, xGap);
       current_bottom += ySlot;
    }
-   // fprintf(stderr, "taken step\n");
-   
+}
+
+// Write the new child parameters to the pointers
+void
+child_params(struct Exclamation *parent, 
+      float *width, float *height,
+      float *xGap, float *ySlot)
+{
+   struct Exclamation fract = *parent;
+
+   // The value in the ySlot.
+   float ySlotV;
+
+   ySlotV = fract.height / VSLOTS;
+   *ySlot = ySlotV; 
+
+   // There are 2 gaps of 35% of the overall width
+   *xGap = fract.width * 0.35;
+   *width = fract.width * 0.1;
+
+   // There is a gap of 0.1 of the height of the children between each child
+   *height = ySlotV * 0.9;
+
 }
 
 // Allocate space
@@ -152,8 +158,12 @@ fractal(struct Exclamation *parent, int *size)
 
    // Number of parents and children
    int parentCount, childCount;
-   // Iterative variable
+   // Iterative variables
    int i;
+   struct Exclamation current_parent;
+
+   // The parameters for the children
+   float width, height, xGap, ySlot;
 
   //  fprintf(stderr, "fractal\n");
 
@@ -174,10 +184,21 @@ fractal(struct Exclamation *parent, int *size)
 
 //      fprintf(stderr, "allocated %d children at %p\n", childCount, children);
 
+      // Get the parameters for the children
+      // Get the paramters for a fractal step
+      child_params(parents,
+            &width, &height, 
+            &xGap, &ySlot);
+      
       // Create all the children
       for (i = 0; i < parentCount; i ++)
       {
-         fractal_step(parents + i, children + (i * STEPCHILDREN));
+         current_parent = parents[i];
+
+         fractal_step(width, height,
+               current_parent.left, current_parent.bottom,
+               xGap, ySlot,
+               children + (i * STEPCHILDREN));
       }
 
 //      fprintf(stderr, "freeing %d parents at %p...\n", parentCount, parents);

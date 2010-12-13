@@ -12,8 +12,8 @@ main(int argc, char ** argv)
 
    parent.height = 200;
    parent.width = 20;
-   parent.bottom = 0;
-   parent.left = 0;
+   parent.bottom = -100;
+   parent.left = -10;
 
    // Get the children from the recursion
    children = fractal(&parent, &size);
