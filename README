@@ -7,6 +7,11 @@ ABOUT
    Exclamation generates a fractal zoom of an exclamation mark and sends it
    stdout.  Nifty!
 
+REQUIREMENTS
+
+   GNU Plotutils
+   gcc
+
 COMPILATION
 
    ./compile.sh
